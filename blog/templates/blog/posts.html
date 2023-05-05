@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-</head>
-<body>
-    <p><h1>Blog Construction in Progress</h1></p>
-    {% for posts in post %}
-    <article>
-        <time>published: {{ post.date_posted }}</time>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
-    </article>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.date_posted }}
+            </div>
+            <h1><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.content_text|linebreaksbr }}</p>
+            <a href="{% url 'post_details' pk=post.pk %}">Comments - {{ post.approved_comments.count }}</a>
+        </div>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}

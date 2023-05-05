@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <article class="post">
+        <aside class="actions">
+            <a class="btn btn-secondary" href="{% url 'edit_posts' pk=post.pk %}">
+                {% include './icons/pencil-fill.svg' %}
+            </a>
+            <a class="btn btn-primary" href="{% url 'delete_posts' pk=post.pk %}">
+                {% include './icons/trash-fill.svg' %}
+            </a>
+        <aside>
+        {% if post.date_posted %}
+            <time class="date">
+                {{ post.date_posted }}
+            </time>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'publish_posts' pk=post.pk %}"><button type="submit" class="btn btn-primary">
+                Publish
+                </button>
+            </a>
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content_text|linebreaksbr }}</p>
+        <hr>
+            <a class="btn btn-primary" href="{% url 'post_comments' pk=post.pk %}"><button type="submit" class="btn btn-primary">
+                Add Comment
+                </button>
+            </a>
+        {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approve_comments %}
+            <div class="comment">
+                <div class="date">
+                    {{ comment.date_created }}
+                    {% if not comment.approve_comments %}
+                        <a class="btn btn-primary" href="{% url 'delete_comments' pk=comment.pk %}"><button type="submit" class="btn btn-primary">
+                            Delete Comment
+                            </button>
+                        </a>
+                        <a class="btn btn-primary" href="{% url 'approve_comments' pk=comment.pk %}"><button type="submit" class="btn btn-primary">
+                            Approve Comment
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+                <p>{{ comment.author }}</p>
+                <p>{{ comment.content_text|linebreaks }}</p>
+            </div>
+            {% endif %}
+        {% empty %}
+            <p>No Comments</p>
+        {% endfor %}
+    </article>
+{% endblock %}
