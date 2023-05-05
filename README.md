@@ -18,7 +18,7 @@
 - Type `conda activate djangoblog`
 ---
 
-## Step Two – Create Django Project, Adjust Settings, and Run Development Server
+## Step Two – Create Django Project, Adjust Settings, and Run Dev Server
 
 ### 1. Create the Django Project
 - Type `django-admin startproject djangoblog .`
@@ -399,7 +399,7 @@ class PostForm(forms.ModelForm):
 - Once, the subdirectory is created, navigate to the Bootstrap website, and select an icon that will signify the ability to create and publish a new blog post and the edit blog post.
 - For this example, the icon "file-earmark-plus-fill.svg" will be used for new posts, and the icon "pencil-fill.svg" will be used for editing posts, and both will be placed in the icons subdirectory.
 - For the new post portion, open "base.html" in the "blog/templates/blog" directory in order to add this icon to the base template. This is the link.
-- Type the following line inside the "div" element inside the "header" section, before the "<h1>" line:
+- Type the following line inside the "div" element inside the "header" section, before the "<h1>" element:
 ```
 <a href="{% url 'new_post' %}" class="top-menu">
     {% include './icons/file-earmark-plus.svg' %}
