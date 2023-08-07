@@ -11,10 +11,10 @@
 ### 3. Create project directory and change into that directory
 - Type `mkdir djangoblog cd djangoblog`
 
-4. Create an environment using the command line and install packages
+### 4. Create an environment using the command line and install packages
 - Type `conda create --name djangoblog python django pandas psycopg3 -y`
 
-5. Activate the environment
+### 5. Activate the environment
 - Type `conda activate djangoblog`
 ---
 
