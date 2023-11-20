@@ -42,11 +42,11 @@
 ---
 ## Step Three – Create Database and Connect to Blog Application
 ### 1. Install Database and Set Up User (PostgreSQL)
-- Ensure that the "psycopg3" Python module is installed.
-- Type `pip install psycopg3` if not already included in initial start-up.
+- Ensure that the "psycopg2-binary" Python module is installed.
+- Type `pip install psycopg2-binary` if not already included in initial start-up.
 - Download PostgreSQL (figure it out, bud).
 - Either download pgAdmin for a GUI client tool to manage the database or use psql in the command line (figure it out, bud).
-- Example (Ubuntu and psql): Open a separate tab from the project terminal and Type `sudo apt install postgresql postgresql-contrib` then `sudo -u postgres psql` for the interactive shell.
+- Example (Ubuntu and psql): Open a separate tab from the project terminal and Type `sudo apt install postgresql postgresql-contrib` then `sudo -i -u postgres` and then `psql` for the interactive shell.
 - To check if psql was installed properly: Type `psql --version` and then `psql` to access the interactive shell.
 - Type `sudo systemctl start postgresql.service` to check if PostgreSQL is running, then `sudo systemctl enable postgresql.service` to automatically start PostgreSQL on system boot, and then verify that it is running `sudo systemctl status postgresql.service` by checking its status.
 - PostgreSQL automatically creates a default user named "postgres" once it is installed on the system, and the user has full "superadmin" privileges, so this should be changed in order to secure the database.
@@ -183,7 +183,7 @@ def posts(request):
 ### 3. Create the Blog URL Route 
 - The "Blog" application inside of the Django project should be the homepage for the entire project. In order to have "localhost:8000" default to the Blog, it needs to be imported from the application files to the project root directory files. This takes place within the "urls.py" file of each directory.
 - Open the "urls.py" files from the "djangoblog" directory and create a "urls.py" file in the "blog" directory.
-- In the djangoblog "urls.py" file, find the "urlpatterns" array and after the first "path" comma, start a new line underneath it and type `path('', include('blog.urls')),` to direct Django to route the homepage to the blog application.
+- In the djangoblog "urls.py" file, add `, include` to `from django.urls import path` after "path" and then find the "urlpatterns" array. After the first "path" comma, start a new line underneath it and type `path('', include('blog.urls')),` to direct Django to route the homepage to the blog application.
 - Open the blog "urls.py" file and type
 ```
 # Importing the "path" function from Django and the "views" from the blog application
