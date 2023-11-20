@@ -197,7 +197,7 @@ urlpatterns = [
     path('', views.posts, name='posts'),
 ]
 ```
-- Save the file and type `python manage.py makemigrations`
+- Save the file and type `python manage.py migrate`
 - Type `python manage.py runserver` and see the results.
 - Style the page with CSS and JavaScript and save changes.
 
