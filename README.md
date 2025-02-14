@@ -1,6 +1,6 @@
 # Django Blog Project
-
-## Step One – Create Project Environment (Using Anaconda)
+---
+## Step One – Create Project Environment (Using Python and )
 
 ### 1. Ensure that Anaconda and all of its packages are up to date
 - Type `conda update --all -y`
@@ -17,7 +17,6 @@
 ### 5. Activate the environment
 - Type `conda activate djangoblog`
 ---
-
 ## Step Two – Create Django Project, Adjust Settings, and Run Dev Server
 
 ### 1. Create the Django Project
@@ -68,7 +67,7 @@
 - Migrate the initial database to our PostgreSQL database in the project environment at the root directory.
 - Type `python manage.py makemigrations` to make the database changes.
 - Type `python manage.py migrate` to migrate the djangoblog database to Django.
----
+
 ### 3. Create Static Folder and Super User Account for Django Project
 - Type `python manage.py collectstatic` to "collect" the CSS/HTML/JS folders.
 - The static files for the project will be located at the root directory.
@@ -935,4 +934,48 @@ admin.site.register(Comment)
 - Type `git add .` then `git commit -m 'commit to main'` and then `git push` in order to push the code to GitHub.
 - Make sure the site has the proper configurations to ensure that it is secure.
 - Utilize "certbot" or "Letsencrypt" to add SSL certificates to the site in order to make it secure via HTTPS.
-- Check the grade on the website with "Qualys SSL Labs" and search for ".conf" files that will improve the grade.
+- Below is a sample NGINX .conf file that will get one at least an 'A' grade on the website with "Qualys SSL Labs":
+```
+  server {
+  listen [::]:80;
+  listen      80;
+  server_name domain.tld www.domain.tld;
+
+  # Redirect all non-https requests
+  rewrite ^ https://$host$request_uri? permanent;
+}
+
+server {
+  listen [::]:443 ssl http2 default_server;
+  listen      443 ssl http2 default_server;
+
+  server_name domain.tld www.domain.tld;
+
+  # Certificate(s) and private key
+  ssl_certificate /etc/ssl/domain.crt;
+  ssl_certificate_key /etc/ssl/domain.key;
+
+  # RFC-7919 recommended: https://wiki.mozilla.org/Security/Server_Side_TLS#ffdhe4096
+  ssl_dhparam /etc/ssl/ffdhe4096.pem;
+
+  # Or, generate random dhparam
+  # openssl dhparam 4096 -out /etc/ssl/dhparam.pem
+  # ssl_dhparam /etc/ssl/dhparam.pem;
+
+  ssl_protocols TLSv1.3 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ecdh_curve secp521r1:secp384r1;
+  ssl_ciphers EECDH+AESGCM:EECDH+AES256;
+
+  ssl_session_cache shared:TLS:2m;
+  ssl_buffer_size 4k;
+
+  # OCSP stapling
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  resolver 1.1.1.1 1.0.0.1 [2606:4700:4700::1111] [2606:4700:4700::1001]; # Cloudflare
+
+  # Set HSTS to 365 days
+  add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload' always;
+}
+```
