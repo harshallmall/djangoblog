@@ -36,7 +36,7 @@
 - Type `ls` to check if you're at the root of the project directory.
 - If at the root, the output will show: "README.md", "djangoblog", and "manage.py" as the two files and one subdirectory inside djangoblog.
 - Type `python manage.py runserver` to start the development server.
-- Open a browser and Type `127.0.0.1:8000` into the URL.
+- Open a browser and Type `0.0.0.0:8000` into the URL.
 - If everything is working properly, you will see a Congratulations! page with a rocketship and a message from Django.
 ---
 ## Step Three – Create Database and Connect to Blog Application
@@ -934,7 +934,13 @@ admin.site.register(Comment)
 - Type `git add .` then `git commit -m 'commit to main'` and then `git push` in order to push the code to GitHub.
 - Make sure the site has the proper configurations to ensure that it is secure.
 - Utilize "certbot" or "Letsencrypt" to add SSL certificates to the site in order to make it secure via HTTPS.
-- Below is a sample NGINX .conf file that will get one at least an 'A' grade on the website with "Qualys SSL Labs":
+    - `sudo apt install certbot python3-certbot-nginx`
+    - `sudo nvim /etc/nginx/sites-available/example.com`
+    - Find your server_name line and edit as such: `server_name example.com www.example.com;`
+    - Add the following lines:
+      - 
+    - `sudo certbot --nginx -d example.com -d www.example.com`
+- Below is a sample nginx.conf file that will get an 'A+' grade on the website with "Qualys SSL Labs":
 ```
   server {
   listen [::]:80;
