@@ -933,8 +933,6 @@ admin.site.register(Comment)
 ```
 - Commit to Git and Push the application to GitHub.
 - Type `git add .` then `git commit -m 'commit to main'` and then `git push` in order to push the code to GitHub.
-- Utilize one of the various Virtual Private Server sites to host your website. I prefer either DigitalOcean or Linode.
-- There are also numerous guides on each VPS site that shows users how to configure the website with a web server such as Apache or NGINx.
 - Make sure the site has the proper configurations to ensure that it is secure.
 - Utilize "certbot" or "Letsencrypt" to add SSL certificates to the site in order to make it secure via HTTPS.
 - Check the grade on the website with "Qualys SSL Labs" and search for ".conf" files that will improve the grade.
