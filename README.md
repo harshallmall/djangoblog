@@ -1,7 +1,8 @@
 # Django Blog Project
 ---
-## Step One – Create Project Environment (Using Python and )
+## Step One – Create Project Environment (Using Python and Miniconda (Diet version of full Anaconda aka 'conda')
 
+### 0. Download Miniconda installer script (May require granting permissions to execute - e.g., `chmod +rwx ./Miniconda_X86_64.sh`)
 ### 1. Ensure that Anaconda and all of its packages are up to date
 - Type `conda update --all -y`
 
