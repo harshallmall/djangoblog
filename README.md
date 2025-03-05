@@ -214,11 +214,14 @@ urlpatterns = [
 - Type `python manage.py shell` and the result will show ">>>" similar to the interactive console in Python. All Python commands may be issued here.
 - Import the files necessary to create an object in the database.
 - Type `from blog.models import Post`
+- Type `from django.contrib.auth.models import User`
+- Display all Users: `User.object.all()`
 - Display all post objects: `Post.objects.all()`
+- Create an instance of the superuser created earlier: `user_one = User.objects.get(username='NAME OF YOUR SUPERUSER')
 - Create an object in PostgreSQL: `Post.objects.create(author=name, title='title_name', content='text')`
 - Filter objects: `Post.objects.filter(ex. author=name)`
 - Filter (Search): `Post.objects.filter(title__contains='name')` in order to search and filter by a given parameter from the "title" field. Django requires double underscores aka "dunders" to separate field names from operations and titles.
-- Publish using "publish" method created earlier: create a variable to assign to the QuerySet method `post = Post.objects.get(title="title_name")` then publish with the "publish" method `post.publish()` and check the result by filtering for the date posted `Post.objects.filter(date_posted___lte=timezone.now())`
+- Publish using "publish" method created earlier: create a variable to assign to the QuerySet method `post = Post.objects.get(title="title_name")` then publish with the "publish" method `post.publish()` and check the result by filtering for the date posted `Post.objects.filter(date_posted__lte=timezone.now())`
 - Order objects: `Post.objects.order_by('date_posted')`
 - Order objects (Ascending): `Post.objects.order_by('-date_posted')`
 - Chain Queries (Complex Queries): `Post.objects.filter(date_posted__lte=timezone.now()).order_by('title')`
